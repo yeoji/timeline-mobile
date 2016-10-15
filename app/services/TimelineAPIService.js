@@ -7,6 +7,10 @@ var TIMELINE_API_BASE_URL = "https://109bl48szj.execute-api.ap-southeast-2.amazo
 
 var moment = require('moment');
 
+module.exports.getUploadAudioUrl = function(username) {
+    return TIMELINE_API_BASE_URL + "/dev/user/" + username + "/audio";
+};
+
 module.exports.getUploadImageUrl = function(username) {
     return TIMELINE_API_BASE_URL + "/dev/user/" + username + "/images";
 };

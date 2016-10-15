@@ -19,6 +19,7 @@ import RegisterForm from './app/components/auth/RegisterForm.js';
 import UserBlog from './app/components/blog/UserBlog.js';
 import TimelineCamera from './app/components/media/TimelineCamera.js';
 import TimelineGallery from './app/components/media/TimelineGallery.js';
+import TimelineAudio from './app/components/media/TimelineAudio.js';
 
 var _navigator;
 
@@ -65,6 +66,8 @@ class TimelineMobile extends Component {
                 return <TimelineCamera navigator={navigator} username={route.username} mobileNo={route.mobileNo}/>;
             case 'Gallery':
                 return <TimelineGallery navigator={navigator}/>;
+            case 'Voice':
+                return <TimelineAudio navigator={navigator} username={route.username} mobileNo={route.mobileNo}/>;
         }
     }
 }

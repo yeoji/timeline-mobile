@@ -21,6 +21,7 @@ import BlogPost from './BlogPost';
 import TimelineAPIService from '../../services/TimelineAPIService';
 
 var ImagePicker = require('react-native-image-picker');
+import SocketIO from 'react-native-socketio';
 
 var options = {
     title: 'Select Image',
@@ -37,6 +38,13 @@ export default class UserBlog extends Component {
         this.state = {posts: [], loading: true, error: false, textPost: ''};
 
         this.retrieveBlogPosts(this);
+
+        var socket = new SocketIO('http://timejar.me', {path: '/' + props.username});
+        socket.on('new_post', function (post) {
+            this.setState({
+                posts: this.state.posts.unshift(post)
+            });
+        });
     }
 
     render() {
@@ -50,13 +58,9 @@ export default class UserBlog extends Component {
             <Container>
                 <Header style={styles.header}>
                     <Title>{this.props.username}</Title>
-
-                    <Button transparent>
-                        <Icon name='ios-menu'/>
-                    </Button>
                 </Header>
                 <Content style={styles.card}>
-                        { this.state.loading ? <Spinner/> : posts}
+                    { this.state.loading ? <Spinner/> : posts}
                 </Content>
                 <Footer style={styles.footer}>
                     <Grid>
@@ -79,7 +83,7 @@ export default class UserBlog extends Component {
                                     Gallery
                                     <Icon name='ios-images-outline'/>
                                 </Button>
-                                <Button>
+                                <Button onPress={this.openVoiceRecorder.bind(this)}>
                                     Voice
                                     <Icon name='ios-microphone-outline'/>
                                 </Button>
@@ -114,6 +118,14 @@ export default class UserBlog extends Component {
             .catch(function (err) {
                 console.error(err);
             });
+    }
+
+    openVoiceRecorder() {
+        this.props.navigator.push({
+            id: 'Voice',
+            username: this.props.username,
+            mobileNo: this.props.mobileNo
+        });
     }
 
     openCamera() {

@@ -17,6 +17,9 @@ import {
 
 import moment from 'moment';
 
+import { Player } from 'react-native-audio-streaming';
+import AudioPlayer from '../media/AudioPlayer';
+
 export default class BlogPost extends Component {
 
     constructor(props) {
@@ -51,6 +54,16 @@ export default class BlogPost extends Component {
                         <CardItem header>
                             <Text
                                 style={{textAlign: 'center'}}>{moment(this.props.timestamp).utcOffset(10).format("MMM D, h:mm A")}</Text>
+                        </CardItem>
+                    </View>
+                );
+                break;
+            case 'audio':
+                var time = moment(this.props.timestamp).utcOffset(10).format("MMM D, h:mm A");
+                item = (
+                    <View style={styles.viewItem}>
+                        <CardItem>
+                            <AudioPlayer url={this.props.content} dateTime={time}/>
                         </CardItem>
                     </View>
                 );
