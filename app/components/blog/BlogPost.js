@@ -37,7 +37,7 @@ export default class BlogPost extends Component {
                                 {this.props.content}
                             </Text>
                         </CardItem>
-                        <CardItem header>
+                        <CardItem header style={styles.footer}>
                             <Text
                                 style={{textAlign: 'center'}}>{moment(this.props.timestamp).utcOffset(10).format("MMM D, h:mm A")}</Text>
                         </CardItem>
@@ -51,7 +51,7 @@ export default class BlogPost extends Component {
                             <Image style={styles.imagePost} source={{uri: this.props.content}}/>
                         </CardItem>
 
-                        <CardItem header>
+                        <CardItem header style={styles.footer}>
                             <Text
                                 style={{textAlign: 'center'}}>{moment(this.props.timestamp).utcOffset(10).format("MMM D, h:mm A")}</Text>
                         </CardItem>
@@ -78,7 +78,7 @@ var styles = StyleSheet.create({
     viewItem: {
         marginTop: 15,
         borderWidth: 1,
-        borderColor: '#d3d3d3',
+        borderColor: '#d7e4ed',
         backgroundColor: 'white'
     },
     cardItem: {
@@ -98,6 +98,12 @@ var styles = StyleSheet.create({
         resizeMode: 'center',
         width: null,
         borderWidth: 15
+    },
+    footer: {
+        backgroundColor: '#d7e4ed',
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end'
     }
 });
 

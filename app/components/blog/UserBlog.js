@@ -21,7 +21,6 @@ import BlogPost from './BlogPost';
 import TimelineAPIService from '../../services/TimelineAPIService';
 
 var ImagePicker = require('react-native-image-picker');
-import SocketIO from 'react-native-socketio';
 
 var options = {
     title: 'Select Image',
@@ -38,13 +37,6 @@ export default class UserBlog extends Component {
         this.state = {posts: [], loading: true, error: false, textPost: ''};
 
         this.retrieveBlogPosts(this);
-
-        var socket = new SocketIO('http://timejar.me', {path: '/' + props.username});
-        socket.on('new_post', function (post) {
-            this.setState({
-                posts: this.state.posts.unshift(post)
-            });
-        });
     }
 
     render() {
@@ -179,7 +171,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 15,
         marginBottom: 15,
-        backgroundColor: '#ededed'
+        backgroundColor: '#E9F0F5'
     },
     header: {
         backgroundColor: '#303E49'

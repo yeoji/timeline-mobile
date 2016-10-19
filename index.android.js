@@ -35,7 +35,7 @@ class TimelineMobile extends Component {
     render() {
         AsyncStorage.multiGet(['@TimeJar:username', '@TimeJar:mobileNo'])
             .then(function(data) {
-                if(data != null) {
+                if(data != null && data[0][1] != null) {
                     _navigator.push({
                         id: 'Blog',
                         username: data[0][1],
